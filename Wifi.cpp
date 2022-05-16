@@ -87,4 +87,6 @@ int main() {
       rounded_str.insert(rounded_str.size() - 1, ".");
       printf("%s\n", rounded_str.c_str()); //Or printf("%g", max); as they are the same at 0.1 près
   }
+
+  return 0; 
 }
