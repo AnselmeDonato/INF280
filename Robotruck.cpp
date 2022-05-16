@@ -21,7 +21,7 @@ int main() {
       //printf("%i %i %i \n", _x, _y, _w);
 
       //If the package can be loaded in the robot, it will be delivered after the last one
-      if(_load + _w <= max_load){ //The robot is still loading
+      if(_load + _w < max_load){ //The robot is still loading
         _load += _w;
         _nb_moves += abs(_last_x - _x) + abs(_last_y - _y);
         _last_x = _x;
