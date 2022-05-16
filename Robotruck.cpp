@@ -23,24 +23,39 @@ int main() {
       //If the package can be loaded in the robot, it will be delivered after the last one
       if(_load + _w < max_load){ //The robot is still loading
         //Two cases are possible : delivering now, even if we still have space or keep on filling the robot
-        //The choice is up to whether it's faster to come back to base or delivering the new package  
-        _load += _w;
-        _nb_moves += abs(_last_x - _x) + abs(_last_y - _y);
-        _last_x = _x;
-        _last_y = _y;
-        printf("Still delivering. Nb moves so far : %i \n", _nb_moves);
+        //The choice is up to whether it's faster to come back to base or delivering the new package
+        int _moves_to_base = _last_x + _last_y;
+        int _moves_to_deliver = abs(_last_x - _x) + abs(_last_y - _y);
+
+        if(_moves_to_base < _moves_to_deliver){ //If it's faster to come back to base
+          _nb_moves += _moves_to_base; //Returning to the base
+          //printf("Better to go back to base. Nb moves so far : %i \n", _nb_moves);
+          _load = _w; //Loading the new package
+          _nb_moves += _x + _y; //Delivering it
+          _last_x = _x; //Back on track
+          _last_y = _y;
+          //printf("Still delivering. Nb moves so far : %i \n", _nb_moves);
+        }
+
+        else{
+          _load += _w;
+          _nb_moves += abs(_last_x - _x) + abs(_last_y - _y);
+          _last_x = _x;
+          _last_y = _y;
+          //printf("Still delivering. Nb moves so far : %i \n", _nb_moves);
+        }
       }
 
       //If the robot is full, it needs to go back to the start
       else{
-        printf("Full : load %i \n", _load);
+        //printf("Full : load %i \n", _load);
         _nb_moves += _last_x + _last_y; //Returning to the base
-        printf("Full, returning to base. Nb moves so far : %i \n", _nb_moves);
+        //printf("Full, returning to base. Nb moves so far : %i \n", _nb_moves);
         _load = _w; //Loading the new package
         _nb_moves += _x + _y; //Delivering it
         _last_x = _x; //Back on track
         _last_y = _y;
-        printf("Still delivering. Nb moves so far : %i \n", _nb_moves);
+        //printf("Still delivering. Nb moves so far : %i \n", _nb_moves);
       }
     }
     _nb_moves += _last_x + _last_y; //Last return to base after the last trip
