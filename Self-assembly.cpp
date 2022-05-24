@@ -12,16 +12,10 @@ struct molecule {
 
 };
 
-void DFS(int u, int _adj[], bool _visited[]){
-  if(_visited[u])
-    return;
-  Visited[u] = true;
-  for (auto v : _adj[u])
-    DFS(v);
-}
-
 int main() {
   int nb_mol;
+  vector<molecule> list_mol;
+
   while(scanf("%i", &nb_mol) != EOF) {
     for(int i = 0; i < nb_mol; i ++) {
       // Make the molecules
@@ -31,12 +25,24 @@ int main() {
     //Build the graph
     //
 
-    bool Visited[nb_mol] = {};
+    bool Visited[nb_mol], OnStack[nb_mol];
+
+    for(int i = 0; i < nb_mol; i++){
+      Visited[i] = false;
+      OnStack[i] = false;
+    }
 
     //DFS to find cycles
-    if(Visited[u])
-      continue;
-    Visited[u]
+    Visited[0] = true;
+    OnStack[0] = true;
+    vector<int> adj = list_mol[0].getAdjList();
+    for(int i = 0; i < adj.size(); i ++){
+      int _adj_mol = adj[i]
+      if(OnStack[_adj_mol]){
+        //Cycle found
+        return 1;
+      }
+    }
   }
   return 0;
 }
