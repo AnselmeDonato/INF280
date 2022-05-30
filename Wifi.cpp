@@ -54,7 +54,7 @@ int main() {
         float point_pos; //Position of the access point
         int left_house, right_house; //Position of the houses most to the left and to the right of the forementioned point
 
-        while(abs(_max - _min) > 0.03){ //Dichotomy
+        while(abs(_max - _min) > 0.0311){ //Dichotomy
           float _mean = (_min + _max) / 2;
           //printf("Dichotomy : min = %g max = %g mean = %g \n", _min, _max, _mean);
           int points_left = n; //Number of access points yet to place
