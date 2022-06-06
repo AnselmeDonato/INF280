@@ -30,7 +30,7 @@ int main() {
       }
 
       if(c == 10){
-        cout << nb_sub << endl;
+        printf("%i\n", nb_sub);
         nb_sub = 0;
       }
 
