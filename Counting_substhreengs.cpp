@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <exception>
 
 using namespace std;
 
@@ -11,18 +12,17 @@ int main() {
 
   while(scanf("%c", &c) != EOF) {
     if(48 <= c && c <= 57) {
-      numberString.append(&c);
+      numberString.push_back(c);
       startNumber = true;
     }
 
     else{
       if(startNumber){
         for(int i = 0; i < numberString.size(); i ++){
-          string sub = "";
+          long maybe_sub = 0;
           for(int j = i; j < numberString.size(); j ++){
-            sub.push_back(numberString[j]);
-            int number = stoi(sub);
-            if(number % 3 == 0){
+            maybe_sub += numberString[j] - '0';
+            if( maybe_sub % 3 == 0){
               nb_sub += 1;
             }
           }
